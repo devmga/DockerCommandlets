@@ -1,0 +1,49 @@
+#	
+# Notas
+#===========================================================================
+# Created with: 	Virtual Studio Code
+# Created on:   	26/01/2019 21:31
+# Created by:   	Chaos4455 	
+#===========================================================================
+# DESCRIÇÃO
+#	Este arquivo possui um arquivo dockerfile versão 3 para deploy de um tack debian com execução de comandos adicionais para instalação, configuração e gestão de serviços
+#
+version: '3'
+
+services:
+
+#Ambiente de produção debian
+
+  debianstack:
+        image: debian
+        hostname: debianstack
+        command: >
+         sh -c "apt-get update -y &&
+                apt-get install su -y &&
+                apt-get install ufw -y &&
+                apt-get install htop -y &&
+                apt-get install dropbear -y &&
+                dropbear start &&
+                dropbear &&
+                ufw allow 22 &&
+                ufw reload &&
+                service ufw restart"
+        ports:
+         - 2222:22
+        deploy:
+         mode: replicated
+         replicas: 1
+         resources:
+           limits:
+             cpus: '1.0'
+             memory: 200M
+           reservations:
+             cpus: '0.50'
+             memory: 100M
+         update_config:
+           parallelism: 1
+           delay: 20s
+         restart_policy:
+           condition: on-failure
+           max_attempts: 3
+           window: 120s

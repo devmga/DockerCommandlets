@@ -1,0 +1,37 @@
+#	
+# Notas
+#===========================================================================
+# Created with: 	Virtual Studio Code
+# Created on:   	26/01/2019 21:31
+# Created by:   	Chaos4455 	
+#===========================================================================
+# DESCRIÇÃO
+#	Este arquivo possui um guia de instalação do docker ce e como liberar suas portas no firwall UFW no sistema ubuntu linux
+#
+
+apt-get update
+
+apt-get install \
+apt-transport-https \
+ca-certificates \
+curl \
+software-properties-common
+
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+apt-key fingerprint 0EBFCD88
+
+sudo add-apt-repository \
+"deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+$(lsb_release -cs) \
+stable"
+
+apt-get update
+
+apt-get install docker-ce
+
+ufw allow 2376/tcp && sudo ufw allow 7946/udp && sudo ufw allow 7946/tcp && sudo ufw allow 80/tcp && sudo ufw allow 2377/tcp && sudo ufw allow 4789/udp
+
+ufw reload && sudo ufw enable
+
+systemctl restart docker

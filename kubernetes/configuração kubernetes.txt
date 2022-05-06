@@ -1,0 +1,26 @@
+#	
+# Notas
+#===========================================================================
+# Created with: 	Virtual Studio Code
+# Created on:   	26/01/2019 21:31
+# Created by:   	Chaos4455 	
+#===========================================================================
+# DESCRIÇÃO
+#	Este arquivo possui alguns comandos básicos de referencia sobre como configurar e iniciar um cluster kubernetes no docker em ambiente debian
+#
+# systemctl daemon-reload
+
+# systemctl restart kubelet
+
+Antes de iniciar o nosso cluster precisamos desabilitar nossa swap, portanto:
+# swapoff -a
+
+E comente a entrada referente a swap em seu arquivo fstab:
+# vim /etc/fstab
+
+
+kubeadm init --apiserver-advertise-address $(hostname -i)
+
+kubeadm join 192.168.42.243:6443 --token qz0m38.5v30ah04o7butdxz --discovery-token-ca-cert-hash sha256:9fd975d8f58f0c62a254bb1e6cdd193e396ecb8226513e44d06587f60f836e31
+
+kubectl get nodes -- roda no adm para ver nodes
