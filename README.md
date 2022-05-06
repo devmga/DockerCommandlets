@@ -4,7 +4,7 @@
 Elias Andrade - 2019
 
 
-- Este reposítorio tem como propósito servidor de apoio e suporte na busca e centralização de informações utilizadas por mim no dia  a dia de trabalho.
+- Este reposítorio tem como propósito servir de apoio e suporte na busca e centralização de informações utilizadas por mim no dia  a dia de trabalho.
 
 # Quem não ama Docker? 
 
